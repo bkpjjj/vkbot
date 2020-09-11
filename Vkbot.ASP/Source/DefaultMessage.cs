@@ -10,7 +10,7 @@ namespace Vkbot.ASP.Source
     {
         public override string Do(Message message)
         {
-            return "Да";
+            return $"Да. {message.Text}";
         }
     }
 }
