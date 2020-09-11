@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Vkbot.ASP.Models;
+using Vkbot.ASP.Source;
+using VkNet.Abstractions;
 using VkNet.Model;
 using VkNet.Utils;
 
@@ -19,16 +21,20 @@ namespace Vkbot.ASP.Controllers
     {
         #region Services
 
-        public BotController(ILogger<BotController> logger,IConfiguration configuration)
+        public BotController(ILogger<BotController> logger,IConfiguration configuration,MessageProcessing messageProcessing,IVkApi vkApi)
         {
             Log = logger;
             Config = configuration;
+            CommandBinding = messageProcessing;
+            Vk = vkApi;
 
             Log.LogInformation("Services Inited");
         }
 
         public ILogger<BotController> Log { get; }
         public IConfiguration Config { get; }
+        public MessageProcessing CommandBinding { get; }
+        public IVkApi Vk { get; }
 
         #endregion
 
@@ -50,7 +56,8 @@ namespace Vkbot.ASP.Controllers
             {
                 Message message = Message.FromJson(new VkResponse(data.Object));
                 Log.LogInformation($"Messasge is:{message}");
-                
+                var responce = CommandBinding.ProcessMessage(message);
+                Vk.Messages.Send(new VkNet.Model.RequestParams.MessagesSendParams() { PeerId = message.PeerId,Message = responce,RandomId = new DateTime().Millisecond });             
             }
 
             return Ok("ok");
