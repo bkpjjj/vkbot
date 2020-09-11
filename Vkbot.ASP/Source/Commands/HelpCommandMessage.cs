@@ -6,6 +6,7 @@ using VkNet.Model;
 
 namespace Vkbot.ASP.Source
 {
+    [BotCommand("/info")]
     [BotCommand("/help")]
     public class HelpCommandMessage : BindingMessage
     {
