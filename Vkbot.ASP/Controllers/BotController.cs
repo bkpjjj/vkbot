@@ -42,7 +42,7 @@ namespace Vkbot.ASP.Controllers
             if (data.Type == "confirmation")
                 return Ok(Config["VkApi:Confirmation"]);
 
-
+            //hi!
             return Ok();
         }
         #endregion
