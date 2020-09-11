@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Vkbot.ASP.Models;
 
 namespace Vkbot.ASP.Controllers
@@ -36,14 +37,15 @@ namespace Vkbot.ASP.Controllers
             return Ok("Vkbot is alive!");
         } 
         [HttpPost("callback")]
-        public IActionResult CallBack(object data)
+        public IActionResult CallBack(object json)
         {
-            Log.LogInformation($"Callback with data:{data}");
-            /*if (data.Type == "confirmation")
+            Log.LogInformation($"Callback with data:{json}");
+            CallbackModel data = JsonConvert.DeserializeObject<CallbackModel>(json.ToString());
+            if (data.Type == "confirmation")
                 return Ok(Config["VkApi:Confirmation"]);
 
             if (data.Type == "new_message")
-                Log.Log(LogLevel.Information, "New message!");*/
+                Log.Log(LogLevel.Information, "New message!");
 
             return Ok("ok");
         }
