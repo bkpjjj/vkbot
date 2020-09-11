@@ -19,9 +19,15 @@ namespace Vkbot.ASP
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration,MessageProcessing messageProcessing)
         {
             Configuration = configuration;
+            CommandsBinding(messageProcessing);
+        }
+
+        public void CommandsBinding(MessageProcessing mp)
+        {
+            mp.AddBinding("/help", new HelpCommandMessage());
         }
 
         public IConfiguration Configuration { get; }
