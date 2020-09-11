@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Vkbot.ASP.Models;
+using VkNet.Model;
+using VkNet.Utils;
 
 namespace Vkbot.ASP.Controllers
 {
@@ -45,7 +47,10 @@ namespace Vkbot.ASP.Controllers
                 return Ok(Config["VkApi:Confirmation"]);
 
             if (data.Type == "message_new")
-                Log.LogInformation("New Message!");
+            {
+                Message message = Message.FromJson(new VkResponse(data.Object));
+                Log.LogInformation($"Messasge is:{message}");
+            }
 
             return Ok("ok");
         }
