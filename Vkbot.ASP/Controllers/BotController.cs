@@ -36,14 +36,14 @@ namespace Vkbot.ASP.Controllers
             return Ok("Vkbot is alive!");
         } 
         [HttpPost("callback")]
-        public IActionResult CallBack([FromBody] CallbackModel data)
+        public IActionResult CallBack(object data)
         {
             Log.LogInformation($"Callback with data:{data}");
-            if (data.Type == "confirmation")
+            /*if (data.Type == "confirmation")
                 return Ok(Config["VkApi:Confirmation"]);
 
             if (data.Type == "new_message")
-                Log.Log(LogLevel.Information, "New message!");
+                Log.Log(LogLevel.Information, "New message!");*/
 
             return Ok("ok");
         }
