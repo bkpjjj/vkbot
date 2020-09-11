@@ -27,8 +27,13 @@ namespace Vkbot.ASP.Controllers
             Config = configuration;
             CommandBinding = messageProcessing;
             Vk = vkApi;
-
+            CommandsBinding();
             Log.LogInformation("Services Inited");
+        }
+
+        public void CommandsBinding()
+        {
+            CommandBinding.AddBinding("/help", new HelpCommandMessage());
         }
 
         public ILogger<BotController> Log { get; }
