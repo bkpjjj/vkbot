@@ -42,8 +42,10 @@ namespace Vkbot.ASP.Controllers
             if (data.Type == "confirmation")
                 return Ok(Config["VkApi:Confirmation"]);
 
-            //hi!
-            return Ok();
+            if (data.Type == "new_message")
+                Log.Log(LogLevel.Information, "New message!");
+
+            return Ok("ok");
         }
         #endregion
     }
