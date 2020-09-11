@@ -35,7 +35,7 @@ namespace Vkbot.ASP.Controllers
         {
             return Ok("Vkbot is alive!");
         } 
-        [HttpPost]
+        [HttpPost("callback")]
         public IActionResult CallBack([FromBody] CallbackModel data)
         {
             Log.LogInformation($"Callback with data:{data}");
