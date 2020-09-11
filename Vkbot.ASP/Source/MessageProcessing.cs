@@ -17,7 +17,8 @@ namespace Vkbot.ASP.Source
 
         public void AddBinding(string command,BindingMessage message)
         {
-            bindings.Add(command, message);
+            if(!bindings.ContainsKey(command))
+                bindings.Add(command, message);
         }
 
         public string ProcessMessage(Message message)

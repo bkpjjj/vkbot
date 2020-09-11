@@ -24,11 +24,6 @@ namespace Vkbot.ASP
             Configuration = configuration;
         }
 
-        public void CommandsBinding(MessageProcessing mp)
-        {
-            mp.AddBinding("/help", new HelpCommandMessage());
-        }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -57,6 +52,8 @@ namespace Vkbot.ASP
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCommandBinding();
 
             app.UseEndpoints(endpoints =>
             {

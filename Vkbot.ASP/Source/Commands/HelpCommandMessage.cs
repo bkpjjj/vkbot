@@ -6,6 +6,7 @@ using VkNet.Model;
 
 namespace Vkbot.ASP.Source
 {
+    [BotCommand("/help")]
     public class HelpCommandMessage : BindingMessage
     {
         public override string Do(Message message)
