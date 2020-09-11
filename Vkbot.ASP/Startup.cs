@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using VkNet;
+using VkNet.Abstractions;
+using VkNet.Model;
 
 namespace Vkbot.ASP
 {
@@ -26,6 +29,12 @@ namespace Vkbot.ASP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<IVkApi>(x =>
+            {
+                var api = new VkApi();
+                api.Authorize(new ApiAuthParams() { AccessToken = Configuration["VkApi:AccessToken"] });
+                return api;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

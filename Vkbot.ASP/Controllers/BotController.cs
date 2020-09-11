@@ -50,6 +50,7 @@ namespace Vkbot.ASP.Controllers
             {
                 Message message = Message.FromJson(new VkResponse(data.Object));
                 Log.LogInformation($"Messasge is:{message}");
+                
             }
 
             return Ok("ok");
