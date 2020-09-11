@@ -38,14 +38,14 @@ namespace Vkbot.ASP.Controllers
         } 
         [HttpPost("callback")]
         public IActionResult CallBack(object json)
-        {
-            Log.LogInformation($"Callback with data:{json}");
+        {      
             CallbackModel data = JsonConvert.DeserializeObject<CallbackModel>(json.ToString());
+            Log.LogInformation($"Callback with data:{data}");
             if (data.Type == "confirmation")
                 return Ok(Config["VkApi:Confirmation"]);
 
-            if (data.Type == "new_message")
-                Log.Log(LogLevel.Information, "New message!");
+            if (data.Type == "message_new")
+                Log.LogInformation("New Message!");
 
             return Ok("ok");
         }
