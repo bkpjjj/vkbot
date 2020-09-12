@@ -55,7 +55,9 @@ namespace Vkbot.ASP.Controllers
             {
                 Message message = Message.FromJson(new VkResponse(data.Object));
                 Log.LogInformation($"Messasge is:{message}");
-                var responce = CommandBinding.ProcessMessage(message);
+
+                Log.LogInformation($"User is:{VkNet.Model.User.FromJson(new VkResponse(data.Object))}");
+                var responce = CommandBinding.ProcessMessage(Vk,message);
                 Vk.Messages.Send(new VkNet.Model.RequestParams.MessagesSendParams() { PeerId = message.PeerId,Message = responce,RandomId = new DateTime().Millisecond });             
             }
 

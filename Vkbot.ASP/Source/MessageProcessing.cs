@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VkNet.Abstractions;
 using VkNet.Model;
 
 namespace Vkbot.ASP.Source
@@ -21,11 +22,11 @@ namespace Vkbot.ASP.Source
                 bindings.Add(command, message);
         }
 
-        public string ProcessMessage(Message message)
+        public string ProcessMessage(IVkApi vkApi,Message message)
         {
             bindings.TryGetValue(message.Text,out BindingMessage bind);
 
-            return (bind ?? BindingMessage.Default).Do(message);
+            return (bind ?? BindingMessage.Default).Do(vkApi,message);
         }
     }
 }
