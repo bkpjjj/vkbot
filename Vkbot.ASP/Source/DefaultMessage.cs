@@ -11,8 +11,8 @@ namespace Vkbot.ASP.Source
     {
         public override string Do(IVkApi vkApi,Message message)
         {
-            long[] users = { (long)message.UserId };
-            User user = vkApi.Users.Get( users ).First();
+            //long[] users = { (long)message.UserId };
+            //User user = vkApi.Users.Get( users ).First();
             
 
             return $"Да. {message.Text}";

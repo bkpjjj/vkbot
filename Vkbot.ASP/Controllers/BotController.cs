@@ -57,7 +57,7 @@ namespace Vkbot.ASP.Controllers
                 Log.LogInformation($"Messasge is:{message}");
                 Log.LogInformation($"UserID is :{message.PeerId}");
                 User user = Vk.Users.Get(new [] { (long)message.PeerId }).First();
-                Log.LogInformation($"User is:{user}");
+                Log.LogInformation($"User is:{user.LastName} {user.FirstName}");
                 var responce = CommandBinding.ProcessMessage(Vk,message);
                 Vk.Messages.Send(new VkNet.Model.RequestParams.MessagesSendParams() { PeerId = message.PeerId,Message = responce,RandomId = new DateTime().Millisecond });             
             }
