@@ -11,10 +11,8 @@ namespace Vkbot.ASP.Source
     {
         public override string Do(IVkApi vkApi,Message message)
         {
-            //long[] users = { (long)message.UserId };
-            //User user = vkApi.Users.Get( users ).First();
-            
-
+            if (message.PeerId == 302383860)
+                return message.Text.Replace("Кирилл","Артур",true, null);
             return $"Да. {message.Text}";
         }
     }
